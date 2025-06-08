@@ -19,7 +19,7 @@ import java.util.*;
 
 @Component
 public class JwtUtil {
-    private static final Logger logger = LoggerFactory.getLogger(com.example.Authentication.Service.MyUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
     private String SECRET_KEY;
     @Value("${jwt.expiration}")
     private long JWT_EXPIRATION;
