@@ -1,4 +1,4 @@
-package com.example.Authentication.Service;
+package com.example.BugHunter.Service;
 
 import com.example.BugHunter.Component.UserPrinciple;
 import com.example.BugHunter.Model.BugHunterUser;
@@ -24,7 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
             logger.warn("Empty username provided.");
             throw new UsernameNotFoundException("Username must not be empty.");
         }
-        BugHunterUser user=userService
+        BugHunterUser user=userService.getUserByUsername(username);
 
         if (user == null) {
             logger.warn("User not found: {}", username);

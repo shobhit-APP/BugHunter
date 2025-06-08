@@ -1,7 +1,6 @@
 package com.example.BugHunter.Configuration;
-
-import com.example.Authentication.Service.MyUserDetailsService;
-import com.example.Authentication.Middleware.AuthorizationFilter;
+import com.example.BugHunter.Middleware.AuthorizationFilter;
+import com.example.BugHunter.Service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,37 +41,17 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                                 // Publicly accessible endpoints
-                                .requestMatchers("/v1/auth/**", "/v1/home/**","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html","/internal/**").permitAll()
-
-//                        // Allow Swagger in dev, restrict in prod
-//                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").hasRole("ADMIN") // Optional
-                                // Role-based access control
-                                .requestMatchers("/v1/admin/**").hasRole("ADMIN")  // Only admins
-                                .requestMatchers("/v1/agent/**").hasRole("AGENT")  // Only agents
-                                .requestMatchers("/v1/user/**").hasAnyRole("USER", "AGENT", "ADMIN") // General users
-
+                                .requestMatchers("").permitAll()
                                 // Catch-all for authenticated users
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        return daoAuthenticationProvider;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
     }
 
 }
