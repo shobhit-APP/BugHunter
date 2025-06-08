@@ -1,10 +1,10 @@
 package com.example.BugHunter.Service;
 
-import com.example.rbac.Model.Permissions;
-import com.example.rbac.Model.Roles;
-import com.example.rbac.Model.RolesPermission;
-import com.example.rbac.Repository.PermissionsRepository;
-import com.example.rbac.Repository.RolesPermissionRepository;
+import com.example.BugHunter.Model.Permissions;
+import com.example.BugHunter.Model.Roles;
+import com.example.BugHunter.Model.RolesPermission;
+import com.example.BugHunter.Repositery.PermissionsRepository;
+import com.example.BugHunter.Repositery.RolesPermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
